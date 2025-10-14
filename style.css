@@ -1,5 +1,59 @@
 /* (Thêm đoạn này vào file style.css của bạn, có thể để ở đầu hoặc cuối) */
+/* Trong file style.css */
 
+/* Điều chỉnh bố cục tổng thể của form trên màn hình nhỏ */
+@media (max-width: 600px) {
+    .form-section {
+        padding: 1rem; /* Giảm padding để có thêm không gian */
+    }
+
+    /* Đảm bảo các input chiếm toàn bộ chiều rộng */
+    .form-row input[type="text"],
+    .form-row input[type="number"],
+    .form-row select { /* Bao gồm cả select nếu bạn dùng */
+        width: calc(100% - 20px); /* Đảm bảo có padding hoặc margin */
+        margin-bottom: 10px; /* Thêm khoảng cách giữa các input */
+    }
+
+    /* Đặt lại bố cục cho các ô Lớp và Giới tính để chúng không bị tràn */
+    .form-row {
+        display: flex; /* Dùng flexbox để sắp xếp các mục */
+        flex-wrap: wrap; /* Cho phép các mục xuống dòng nếu không đủ chỗ */
+        gap: 15px; /* Khoảng cách giữa các ô */
+        margin-bottom: 20px;
+        align-items: flex-end; /* Căn chỉnh các item ở cuối */
+    }
+
+    .form-row .form-group:first-child { /* Ô Lớp */
+        flex: 1 1 120px; /* Cho phép co giãn, tối thiểu 120px */
+        max-width: 150px; /* Giới hạn chiều rộng cho ô Lớp */
+    }
+
+    .form-row .form-group:last-child { /* Ô Giới tính */
+        flex: 1 1 150px; /* Cho phép co giãn, tối thiểu 150px */
+        display: flex; /* Dùng flexbox để căn giữa các radio button */
+        align-items: center;
+        justify-content: space-between; /* Giãn cách các radio button */
+        gap: 5px; /* Khoảng cách giữa label và radio */
+    }
+
+    /* Căn chỉnh lại label của gender để không bị xuống dòng xấu */
+    .form-row .form-group:last-child label {
+        white-space: nowrap; /* Ngăn không cho label xuống dòng */
+        margin-right: 5px;
+    }
+
+    /* Đảm bảo các radio button nhỏ hơn */
+    .form-row input[type="radio"] {
+        transform: scale(0.9); /* Thu nhỏ radio button một chút */
+    }
+
+    /* Điều chỉnh kích thước font chữ cho dễ nhìn trên di động */
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.3rem; }
+    label { font-size: 0.95rem; }
+    button { font-size: 1rem; }
+}
 /* --- HIỆU ỨNG MASCOT CHIM CÁNH CỤT --- */
 .penguin-mascot {
     font-size: 4rem; /* Kích thước icon */
@@ -274,4 +328,5 @@ input[type="text"], textarea { width: 100%; padding: 0.8rem; border: 1px solid v
 #textLikert span
 {
     font-size: 15px;
+
 }
