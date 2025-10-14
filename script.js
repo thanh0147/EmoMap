@@ -151,7 +151,7 @@ form.addEventListener('submit', async (event) => {
 
     try {
         // --- Gửi dữ liệu đến địa chỉ của Backend ---
-        const response = await fetch('http://127.0.0.1:8000/submit-survey', {
+        const response = await fetch('https://emomap-backend.onrender.com/submit-survey', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data), // Chuyển dữ liệu thành chuỗi JSON
@@ -207,4 +207,5 @@ feedbackModal.addEventListener('click', (event) => {
 
     // --- KHỞI TẠO ---
     showStep(currentStep);
+
 });
