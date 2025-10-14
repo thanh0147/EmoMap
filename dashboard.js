@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const startDate = new Date();
         startDate.setDate(endDate.getDate() - days);
 
-        const apiUrl = `http://127.0.0.1:8000/dashboard-data?start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate.toISOString().split('T')[0]}`;
+        const apiUrl = `https://emomap-backend.onrender.com/dashboard-data?start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate.toISOString().split('T')[0]}`;
         
         try {
             const response = await fetch(apiUrl);
@@ -76,4 +76,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mặc định tải dữ liệu của 30 ngày qua khi vào trang
     fetchAndDrawChart(30);
+
 });
