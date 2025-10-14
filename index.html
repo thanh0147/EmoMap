@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmoMap - Ghi nhận cảm xúc</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/763/763755.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<div id="loading-modal" class="modal-overlay hidden">
+    <div class="modal-content loading-content">
+        <div class="penguin-loader"></div>
+        <p>Emo đang lắng nghe và chuẩn bị lời khuyên cho bạn...</p>
+    </div>
+</div>
+
+<div id="feedback-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>💖 Phản hồi từ Emo 💖</h2>
+            <button id="close-feedback-btn" class="close-btn">&times;</button>
+        </div>
+        <div id="feedback-text" class="modal-body">
+            </div>
+    </div>
+</div>
+<body>
+    <div class="container">
+
+        <h1><img src="https://cdn-icons-png.flaticon.com/512/763/763755.png" width="8%" alt="">
+            EmoMap - Ghi nhận cảm xúc hằng ngày</h1>
+        <div id="penguin-mascot" class="penguin-mascot"></div>
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+        </div>
+
+        <form id="emotionForm">
+            <div class="survey-step active-step">
+                <fieldset class="form-section">
+                    <legend>Thông tin cơ bản</legend>
+                    <div class="form-group">
+                        <label for="fullName">Họ và Tên</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Nhập họ tên của bạn">
+                    </div>
+                    <div class="form-group anonymous-check">
+                        <input type="checkbox" id="anonymous" name="anonymous">
+                        <label for="anonymous">Tôi muốn chia sẻ ẩn danh</label>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="className">Lớp</label>
+                            <input type="text" id="className" name="className" placeholder="Ví dụ: 10A2" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Giới tính</label>
+                            <div class="gender-options">
+                                <input type="radio" id="male" name="gender" value="Nam" required><label for="male">Nam</label>
+                                <input type="radio" id="female" name="gender" value="Nữ" required><label for="female">Nữ</label>
+                                <input type="radio" id="other" name="gender" value="Khác" required><label for="other">Khác</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="navigation-buttons">
+                    <button type="button" class="btn-next">Tiếp theo &rarr;</button>
+                </div>
+            </div>
+
+            <div class="survey-step">
+                <fieldset class="form-section">
+                    <legend>I. Cảm xúc tích cực trong học tập</legend>
+                    <div class="likert-item" data-question-id="q1">
+                        <p>1. Tôi cảm thấy hứng thú khi tham gia các tiết học trên lớp.</p>
+                        <div class="likert-icons" ><span data-value="1">😠</span><span data-value="2">😟</span><span data-value="3">😐</span><span data-value="4">🙂</span><span data-value="5">😄</span></div>
+                        <input type="range" class="likert-slider" min="1" max="5" value="3" name="q1">
+                        <div class="likert-icons" id="textLikert" ><span data-value="1">Căng thẳng</span><span data-value="2">Buồn</span><span data-value="3">Bình thường</span><span data-value="4">Vui vẻ</span><span data-value="5">Hào hứng</span></div>
+                    </div>
+                    <div class="likert-item" data-question-id="q2">
+                        <p>2. Tôi cảm thấy vui vẻ khi đến trường mỗi ngày.</p>
+                        <div class="likert-icons"><span data-value="1">😠</span><span data-value="2">😟</span><span data-value="3">😐</span><span data-value="4">🙂</span><span data-value="5">😄</span></div>
+                        <input type="range" class="likert-slider" min="1" max="5" value="3" name="q2">
+                        <div class="likert-icons" id="textLikert"><span data-value="1">Căng thẳng</span><span data-value="2">Buồn</span><span data-value="3">Bình thường</span><span data-value="4">Vui vẻ</span><span data-value="5">Hào hứng</span></div>
+                    </div>
+                </fieldset>
+                <div class="navigation-buttons">
+                    <button type="button" class="btn-prev">&larr; Quay lại</button>
+                    <button type="button" class="btn-next">Tiếp theo &rarr;</button>
+                </div>
+            </div>
+
+            <div class="survey-step">
+                 <fieldset class="form-section">
+                    <legend>II. Cảm xúc tiêu cực trong học đường</legend>
+                    <div class="likert-item" data-question-id="q3">
+                        <p>1. Tôi thường cảm thấy lo lắng trước các bài kiểm tra.</p>
+                        <div class="likert-icons"><span data-value="1">😠</span><span data-value="2">😟</span><span data-value="3">😐</span><span data-value="4">🙂</span><span data-value="5">😄</span></div>
+                        <input type="range" class="likert-slider" min="1" max="5" value="3" name="q3">
+                        <div class="likert-icons" id="textLikert"><span data-value="1">Căng thẳng</span><span data-value="2">Buồn</span><span data-value="3">Bình thường</span><span data-value="4">Vui vẻ</span><span data-value="5">Hào hứng</span></div>
+                    </div>
+                    <div class="likert-item" data-question-id="q4">
+                        <p>2. Tôi cảm thấy căng thẳng khi bị giao nhiều bài tập.</p>
+                        <div class="likert-icons"><span data-value="1">😠</span><span data-value="2">😟</span><span data-value="3">😐</span><span data-value="4">🙂</span><span data-value="5">😄</span></div>
+                        <input type="range" class="likert-slider" min="1" max="5" value="3" name="q4">
+                        <div class="likert-icons" id="textLikert"><span data-value="1">Căng thẳng</span><span data-value="2">Buồn</span><span data-value="3">Bình thường</span><span data-value="4">Vui vẻ</span><span data-value="5">Hào hứng</span></div>
+                    </div>
+                 </fieldset>
+                 <div class="navigation-buttons">
+                    <button type="button" class="btn-prev">&larr; Quay lại</button>
+                    <button type="button" class="btn-next">Tiếp theo &rarr;</button>
+                </div>
+            </div>
+            
+            <div class="survey-step">
+                <fieldset class="form-section">
+                   <legend>III. Cảm xúc trong các mối quan hệ xã hội</legend>
+                   <div class="likert-item" data-question-id="q5">
+                       <p>1. Tôi cảm thấy thoải mái khi giao tiếp với bạn bè trong lớp.</p>
+                       <div class="likert-icons"><span data-value="1">😠</span><span data-value="2">😟</span><span data-value="3">😐</span><span data-value="4">🙂</span><span data-value="5">😄</span></div>
+                       <input type="range" class="likert-slider" min="1" max="5" value="3" name="q5">
+                        <div class="likert-icons" id="textLikert"><span data-value="1">Căng thẳng</span><span data-value="2">Buồn</span><span data-value="3">Bình thường</span><span data-value="4">Vui vẻ</span><span data-value="5">Hào hứng</span></div>
+                   </div>
+                   <div class="likert-item" data-question-id="q6">
+                       <p>2. Tôi cảm thấy an toàn khi chia sẻ cảm xúc của mình với người khác.</p>
+                       <div class="likert-icons"><span data-value="1">😠</span><span data-value="2">😟</span><span data-value="3">😐</span><span data-value="4">🙂</span><span data-value="5">😄</span></div>
+                       <input type="range" class="likert-slider" min="1" max="5" value="3" name="q6">
+                        <div class="likert-icons" id="textLikert"><span data-value="1">Căng thẳng</span><span data-value="2">Buồn</span><span data-value="3">Bình thường</span><span data-value="4">Vui vẻ</span><span data-value="5">Hào hứng</span></div>
+                   </div>
+                </fieldset>
+                <div class="navigation-buttons">
+                   <button type="button" class="btn-prev">&larr; Quay lại</button>
+                   <button type="button" class="btn-next">Tiếp theo &rarr;</button>
+               </div>
+           </div>
+
+            <div class="survey-step">
+                <fieldset class="form-section">
+                   <legend>IV. Cảm xúc về bản thân</legend>
+                   <div class="likert-item" data-question-id="q7">
+                       <p>1. Tôi hài lòng với bản thân mình.</p>
+                       <div class="likert-icons"><span data-value="1">😠</span><span data-value="2">😟</span><span data-value="3">😐</span><span data-value="4">🙂</span><span data-value="5">😄</span></div>
+                       <input type="range" class="likert-slider" min="1" max="5" value="3" name="q7">
+                        <div class="likert-icons" id="textLikert"><span data-value="1">Căng thẳng</span><span data-value="2">Buồn</span><span data-value="3">Bình thường</span><span data-value="4">Vui vẻ</span><span data-value="5">Hào hứng</span></div>
+                   </div>
+                   <div class="likert-item" data-question-id="q8">
+                       <p>2. Tôi thường nghi ngờ khả năng của bản thân.</p>
+                       <div class="likert-icons"><span data-value="1">😠</span><span data-value="2">😟</span><span data-value="3">😐</span><span data-value="4">🙂</span><span data-value="5">😄</span></div>
+                       <input type="range" class="likert-slider" min="1" max="5" value="3" name="q8">
+                        <div class="likert-icons" id="textLikert"><span data-value="1">Căng thẳng</span><span data-value="2">Buồn</span><span data-value="3">Bình thường</span><span data-value="4">Vui vẻ</span><span data-value="5">Hào hứng</span></div>
+                   </div>
+                </fieldset>
+                <div class="navigation-buttons">
+                   <button type="button" class="btn-prev">&larr; Quay lại</button>
+                   <button type="button" class="btn-next">Tiếp theo &rarr;</button>
+               </div>
+           </div>
+
+            <div class="survey-step">
+                <fieldset class="form-section">
+                    <legend>Chia sẻ thêm</legend>
+                    <div class="form-group">
+                        <label for="openEnded">Nếu có điều gì cụ thể khiến bạn vui/buồn/lo lắng trong hôm nay, hãy chia sẻ ở đây nhé.</label>
+                        <textarea id="openEnded" name="openEnded" rows="4" placeholder="Hôm nay mình cảm thấy..."></textarea>
+                    </div>
+                </fieldset>
+                <div class="navigation-buttons">
+                    <button type="button" class="btn-prev">&larr; Quay lại</button>
+                    <button type="submit" class="btn-submit">Hoàn thành & Gửi</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

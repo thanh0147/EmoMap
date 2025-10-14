@@ -1,0 +1,277 @@
+/* (Thêm đoạn này vào file style.css của bạn, có thể để ở đầu hoặc cuối) */
+
+/* --- HIỆU ỨNG MASCOT CHIM CÁNH CỤT --- */
+.penguin-mascot {
+    font-size: 4rem; /* Kích thước icon */
+    text-align: center;
+    margin-bottom: 1rem;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng nảy */
+    user-select: none; /* Không cho phép bôi đen icon */
+    animation: wobble 2.5s ease-in-out infinite; /* Áp dụng hiệu ứng lắc lư */
+}
+
+/* Thêm hiệu ứng nhỏ khi người dùng di chuột qua */
+.penguin-mascot:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* (Các phần CSS còn lại giữ nguyên như cũ) */
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #4a90e2;
+    --background-color: #f4f7f9;
+    --form-background: #ffffff;
+    --text-color: #333;
+    --label-color: #555;
+    --border-color: #ddd;
+}
+
+body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 700px;
+    background-color: var(--form-background);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+/* --- THANH TIẾN TRÌNH --- */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    transition: width 0.4s ease;
+}
+
+/* --- CÁC BƯỚC KHẢO SÁT --- */
+.survey-step {
+    display: none; /* Ẩn tất cả các bước */
+    animation: fadeIn 0.5s;
+}
+
+.survey-step.active-step {
+    display: block; /* Chỉ hiện bước hiện tại */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Các style cũ (giữ nguyên) --- */
+fieldset, .form-section { border: none; padding: 0; margin: 0; }
+legend { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); }
+.form-group { margin-bottom: 1rem; }
+.form-row { display: flex; gap: 1.5rem; }
+.form-row .form-group { flex: 1; }
+label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--label-color); }
+input[type="text"], textarea { width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
+.anonymous-check { display: flex; align-items: center; gap: 0.5rem; }
+.anonymous-check label { margin-bottom: 0; }
+.gender-options { display: flex; align-items: center; gap: 1rem; }
+
+/* --- ICON TƯƠNG TÁC VỚI SLIDER --- */
+.likert-item { margin-bottom: 2rem; }
+.likert-icons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    margin-bottom: 0.5rem;
+    height: 3rem; /* Đặt chiều cao cố định để không bị giật layout */
+    align-items: center;
+}
+.likert-icons span {
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+    opacity: 0; /* Ẩn tất cả icon ban đầu */
+    transform: scale(0.8);
+}
+.likert-icons span.active {
+    opacity: 1; /* Chỉ hiện icon được chọn */
+    transform: scale(1.4);
+}
+
+.likert-slider { -webkit-appearance: none; width: 100%; height: 8px; background: #e9ecef; border-radius: 5px; outline: none; cursor: pointer; }
+.likert-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; background: var(--primary-color); border-radius: 50%; cursor: pointer; }
+.likert-slider::-moz-range-thumb { width: 20px; height: 20px; background: var(--primary-color); border-radius: 50%; cursor: pointer; }
+
+
+/* --- NÚT ĐIỀU HƯỚNG --- */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+}
+
+.navigation-buttons .btn-next,
+.navigation-buttons .btn-prev,
+.navigation-buttons .btn-submit {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.navigation-buttons .btn-prev {
+    background-color: #a0a0a0;
+}
+.navigation-buttons .btn-next:hover,
+.navigation-buttons .btn-submit:hover {
+    background-color: #357abd;
+}
+.navigation-buttons .btn-prev:hover {
+    background-color: #888;
+}
+
+/* Căn phải cho nút Next ở bước đầu tiên */
+.survey-step:first-child .navigation-buttons {
+    justify-content: flex-end;
+}
+/* (Thêm đoạn code này vào cuối file style.css của bạn) */
+
+/* --- MODAL (POP-UP) STYLING --- */
+.modal-overlay {
+    position: fixed; /* Nằm cố định trên màn hình */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Lớp nền mờ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Luôn nằm trên cùng */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay:not(.hidden) .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.modal-body {
+    line-height: 1.7;
+    white-space: pre-wrap; /* Giữ lại các định dạng xuống dòng của Gemini */
+}
+
+/* --- HIỆU ỨNG LOADING CUTE --- */
+.loading-content {
+    text-align: center;
+}
+
+.loading-content p {
+    font-weight: 500;
+    color: var(--label-color);
+}
+
+.penguin-loader {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/763/763775.png'); /* Icon mèo */
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: penguin-walk 1.2s infinite;
+}
+
+@keyframes penguin-walk {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(-5deg); }
+    75% { transform: translateY(-5px) rotate(5deg); }
+}
+
+/* Class 'hidden' để ẩn các modal ban đầu */
+.hidden {
+    display: none;
+}
+/* (Thêm vào cuối file style.css) */
+
+@keyframes wobble {
+  0%, 100% {
+    transform: rotate(0deg); /* Trạng thái ban đầu và kết thúc */
+  }
+  25% {
+    transform: rotate(-10deg); /* Lắc sang trái */
+  }
+  75% {
+    transform: rotate(10deg); /* Lắc sang phải */
+  }
+}
+#textLikert span
+{
+    font-size: 15px;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmoMap - Biểu đồ cảm xúc</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        /* Thêm style riêng cho trang dashboard */
+        body { background-color: #f4f7f6; }
+        .dashboard-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 2rem auto;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .filter-section {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+        .filter-section button {
+            background-color: var(--primary-color);
+            color: white; border: none; padding: 0.5rem 1rem;
+            border-radius: 6px; cursor: pointer; transition: background-color 0.2s;
+        }
+        .filter-section button:hover { background-color: #27ae60; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>📊 Biểu đồ Cảm xúc Học đường</h1>
+        <div class="filter-section">
+            <label>Xem theo:</label>
+            <button id="btn-7-days">7 ngày qua</button>
+            <button id="btn-30-days">30 ngày qua</button>
+            <a href="index.html" style="margin-left: auto;">Quay lại trang khảo sát</a>
+        </div>
+        <canvas id="emotionChart"></canvas>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
