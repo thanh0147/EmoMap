@@ -104,26 +104,71 @@ async def handle_survey(data: SurveyData, db: Session = Depends(get_db)):
     # --- Prompt Engineering: Tạo một prompt thông minh cho Gemini ---
     # Tổng hợp thông tin từ Likert scale để cung cấp ngữ cảnh cho AI
     context_summary = []
-    if data.q3 >= 4: context_summary.append("thường cảm thấy lo lắng về kiểm tra")
-    if data.q4 >= 4: context_summary.append("cảm thấy căng thẳng vì bài tập")
-    if data.q5 <= 2: context_summary.append("khó khăn khi giao tiếp với bạn bè")
-    if data.q8 >= 4: context_summary.append("hay nghi ngờ khả năng của bản thân")
+    if data.q1 == 1: context_summary.append("cảm thấy căng thẳng khi tham gia các tiết học trên lớp.")
+    if data.q1 == 2: context_summary.append("cảm thấy buồn khi tham gia các tiết học trên lớp.")
+    if data.q1 == 3: context_summary.append("cảm thấy bình thường khi tham gia các tiết học trên lớp.")
+    if data.q1 == 4: context_summary.append("cảm thấy vui vẻ khi tham gia các tiết học trên lớp.")
+    if data.q1 == 5: context_summary.append("cảm thấy hào hứng khi tham gia các tiết học trên lớp.")
+        
+    if data.q2 == 1: context_summary.append("cảm thấy căng thẳng khi đến trường.")
+    if data.q2 == 2: context_summary.append("cảm thấy sợ hãi khi đến trường.")
+    if data.q2 == 3: context_summary.append("cảm thấy bình thường khi đến trường.")
+    if data.q2 == 4: context_summary.append("cảm thấy vui vẻ khi đến trường.")
+    if data.q2 == 5: context_summary.append("cảm thấy hào hứng khi đến trường.")
+
+    if data.q3 == 1: context_summary.append("cảm thấy căng thẳng khi chứng kiến bạo lực học đường.")
+    if data.q3 == 2: context_summary.append("cảm thấy buồn khi chứng kiến bạo lực học đường.")
+    if data.q3 == 3: context_summary.append("cảm thấy bình thường khi chứng kiến bạo lực học đường.")
+    if data.q3 == 4: context_summary.append("cảm thấy vui vẻ khi chứng kiến bạo lực học đường.")
+    if data.q3 == 5: context_summary.append("cảm thấy hào hứng khi chứng kiến bạo lực học đường.")
+
+    if data.q4 == 1: context_summary.append("cảm thấy Nhàm chán khi giao tiếp với bạn bè trong lớp.")
+    if data.q4 == 2: context_summary.append("cảm thấy Vô dụng khi giao tiếp với bạn bè trong lớp.")
+    if data.q4 == 3: context_summary.append("cảm thấy Không quan tâm khi giao tiếp với bạn bè trong lớp.")
+    if data.q4 == 4: context_summary.append("cảm thấy Phù hợp khi giao tiếp với bạn bè trong lớp.")
+    if data.q4 == 5: context_summary.append("cảm thấy Hào hứng khi giao tiếp với bạn bè trong lớp.")
+
+    if data.q5 == 1: context_summary.append("cảm thấy căng thẳng khi có ứng dụng ghi lại cảm xúc hằng ngày.")
+    if data.q5 == 2: context_summary.append("cảm thấy buồn khi có ứng dụng ghi lại cảm xúc hằng ngày.")
+    if data.q5 == 3: context_summary.append("cảm thấy bình thường khi có ứng dụng ghi lại cảm xúc hằng ngày.")
+    if data.q5 == 4: context_summary.append("cảm thấy vui vẻ khi có ứng dụng ghi lại cảm xúc hằng ngày.")
+    if data.q5 == 5: context_summary.append("cảm thấy hào hứng khi có ứng dụng ghi lại cảm xúc hằng ngày.")  
+
+    if data.q6 == 1: context_summary.append("cảm thấy căng thẳng khi chia sẻ cảm xúc của mình đối với người khác.")
+    if data.q6 == 2: context_summary.append("cảm thấy Lo lắng khi chia sẻ cảm xúc của mình đối với người khác.")
+    if data.q6 == 3: context_summary.append("cảm thấy bình thường khi chia sẻ cảm xúc của mình đối với người khác.")
+    if data.q6 == 4: context_summary.append("cảm thấy An toàn khi chia sẻ cảm xúc của mình đối với người khác.")
+    if data.q6 == 5: context_summary.append("cảm thấy Vui vẻ khi chia sẻ cảm xúc của mình đối với người khác.")  
+
+    if data.q7 == 1: context_summary.append("cảm thấy Chán ghét với bản thân mình.")
+    if data.q7 == 2: context_summary.append("cảm thấy Thất vọng với bản thân mình.")
+    if data.q7 == 3: context_summary.append("cảm thấy bình thường với bản thân mình.")
+    if data.q7 == 4: context_summary.append("cảm thấy vui vẻ với bản thân mình.")
+    if data.q7 == 5: context_summary.append("cảm thấy Tự hào với bản thân mình.")  
+
+    if data.q2 == 1: context_summary.append("cảm thấy Tự ti khả năng của bản thân..")
+    if data.q2 == 2: context_summary.append("cảm thấy Thất vọng khả năng của bản thân..")
+    if data.q2 == 3: context_summary.append("cảm thấy bình thường khả năng của bản thân..")
+    if data.q2 == 4: context_summary.append("cảm thấy Hài lòng khả năng của bản thân..")
+    if data.q2 == 5: context_summary.append("cảm thấy Tự tin khả năng của bản thân..")  
+
 
     # Tạo prompt
     prompt = f"""
-    Bạn là Emo, một chuyên gia tâm lý học đường ảo, một người bạn đồng hành ấm áp và đáng tin cậy của học sinh THPT.
+    Bạn là Emo, một giáo viên rất yêu thương HS, một chuyên gia tâm lý học đường ảo, một người bạn đồng hành ấm áp và đáng tin cậy của học sinh THPT.
     Một học sinh vừa chia sẻ cảm xúc của mình.
-    
-    Ngữ cảnh từ các câu trả lời trắc nghiệm: Học sinh này {', '.join(context_summary) if context_summary else "có cảm xúc khá ổn định"}.
-    
+    Tên của HS là {full_name}, giới tính là {data.gender}, học lớp {data.className}.
+    Ngữ cảnh từ câu trả lời Học sinh này {', '.join(context_summary) if context_summary else "có cảm xúc khá ổn định"}.
     Chia sẻ thêm của học sinh: "{data.openEnded if data.openEnded else "Học sinh không chia sẻ gì thêm."}"
     
     Nhiệm vụ của bạn:
-    1. Dựa vào CẢ NGỮ CẢNH và CHIA SẺ THÊM, hãy viết một phản hồi NGẮN GỌN (tối đa 3 câu), chân thành, tích cực và mang tính xây dựng.
-    2. Giọng văn phải thật sự đồng cảm, không phán xét, như một người bạn lớn đang lắng nghe.
-    3. Nếu học sinh chia sẻ điều tiêu cực, hãy công nhận cảm xúc đó và gợi ý một hướng suy nghĩ tích cực nhỏ.
-    4. KHÔNG dùng các câu sáo rỗng như "Tôi hiểu cảm giác của bạn" hay "Tôi là một mô hình AI".
-    5. Bắt đầu trực tiếp vào vấn đề. Tên của bạn là Emo.
+    1. Bạn hãy gửi một lời chào thân thiện với HS.
+    2. Dựa vào CẢ NGỮ CẢNH và CHIA SẺ THÊM, hãy viết một phản hồi NGẮN GỌN (tối đa 2 đoạn và mỗi đoạn 3 câu), chân thành, tích cực và mang tính xây dựng.
+    3. Giọng văn phải thật sự đồng cảm, không phán xét, như một người bạn lớn đang lắng nghe.
+    4. Nếu học sinh chia sẻ điều tiêu cực, hãy công nhận cảm xúc đó và gợi ý một hướng suy nghĩ tích cực nhỏ.
+    5. KHÔNG dùng các câu sáo rỗng như "Tôi hiểu cảm giác của bạn" hay "Tôi là một mô hình AI".
+    6. Bắt đầu trực tiếp vào vấn đề. Tên của bạn là Emo.
+    7. Cuối cùng hay thêm 1 đoạn tối đa 3 câu đưa ra lời khuyên tích cực dành cho HS cho những ngày mới tại trường THCS&THPT Sư Phạm.
     """
     
     try:
@@ -197,4 +242,5 @@ async def get_dashboard_data(
             social_avg=round(row.social_avg, 2) if row.social_avg else 0,
             self_esteem_avg=round(row.self_esteem_avg, 2) if row.self_esteem_avg else 0
         ) for row in query_result
+
     ]
