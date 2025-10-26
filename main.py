@@ -13,7 +13,25 @@ import database
 # Tải API key từ file .env
 api_key = os.getenv("AIzaSyCvOEzoZy4I5hJooz5bpayWI-nY9XLdo_k")
 genai.configure(api_key=api_key)
-
+# ✅ KHAI BÁO CẤU HÌNH AN TOÀN
+safety_settings = [
+    {
+        "category": "HARM_CATEGORY_HARASSMENT",
+        "threshold": "BLOCK_NONE"
+    },
+    {
+        "category": "HARM_CATEGORY_HATE_SPEECH",
+        "threshold": "BLOCK_NONE"
+    },
+    {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+        "threshold": "BLOCK_NONE"
+    },
+    {
+        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+        "threshold": "BLOCK_NONE"
+    }
+]
 # Khởi tạo ứng dụng FastAPI
 app = FastAPI()
 
@@ -65,6 +83,7 @@ generation_config = {
 }
 model = genai.GenerativeModel(
     model_name="gemini-2.5-flash",
+    safety_settings=safety_settings,
     generation_config=generation_config
 )
 
@@ -245,6 +264,7 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
 
