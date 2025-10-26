@@ -111,27 +111,27 @@ async def handle_survey(data: SurveyData, db: Session = Depends(get_db)):
     if data.q1 == 5: context_summary.append("cảm thấy hào hứng khi tham gia các tiết học trên lớp.")
         
     if data.q2 == 1: context_summary.append("cảm thấy căng thẳng khi đến trường.")
-    if data.q2 == 2: context_summary.append("cảm thấy sợ hãi khi đến trường.")
+    if data.q2 == 2: context_summary.append("cảm thấy lạc lõng khi đến trường.")
     if data.q2 == 3: context_summary.append("cảm thấy bình thường khi đến trường.")
     if data.q2 == 4: context_summary.append("cảm thấy vui vẻ khi đến trường.")
     if data.q2 == 5: context_summary.append("cảm thấy hào hứng khi đến trường.")
 
-    if data.q3 == 1: context_summary.append("cảm thấy căng thẳng khi chứng kiến bạo lực học đường.")
+    if data.q3 == 1: context_summary.append("cảm thấy Sợ hãi khi chứng kiến bạo lực học đường.")
     if data.q3 == 2: context_summary.append("cảm thấy buồn khi chứng kiến bạo lực học đường.")
     if data.q3 == 3: context_summary.append("cảm thấy bình thường khi chứng kiến bạo lực học đường.")
     if data.q3 == 4: context_summary.append("cảm thấy vui vẻ khi chứng kiến bạo lực học đường.")
-    if data.q3 == 5: context_summary.append("cảm thấy hào hứng khi chứng kiến bạo lực học đường.")
+    if data.q3 == 5: context_summary.append("cảm thấy hứng thú khi chứng kiến bạo lực học đường.")
 
-    if data.q4 == 1: context_summary.append("cảm thấy Nhàm chán khi giao tiếp với bạn bè trong lớp.")
-    if data.q4 == 2: context_summary.append("cảm thấy Vô dụng khi giao tiếp với bạn bè trong lớp.")
-    if data.q4 == 3: context_summary.append("cảm thấy Không quan tâm khi giao tiếp với bạn bè trong lớp.")
-    if data.q4 == 4: context_summary.append("cảm thấy Phù hợp khi giao tiếp với bạn bè trong lớp.")
+    if data.q4 == 1: context_summary.append("cảm thấy Căng thẳng khi giao tiếp với bạn bè trong lớp.")
+    if data.q4 == 2: context_summary.append("cảm thấy Sợ hãi khi giao tiếp với bạn bè trong lớp.")
+    if data.q4 == 3: context_summary.append("cảm thấy bình thường khi giao tiếp với bạn bè trong lớp.")
+    if data.q4 == 4: context_summary.append("cảm thấy vui vẻ khi giao tiếp với bạn bè trong lớp.")
     if data.q4 == 5: context_summary.append("cảm thấy Hào hứng khi giao tiếp với bạn bè trong lớp.")
 
-    if data.q5 == 1: context_summary.append("cảm thấy căng thẳng khi có ứng dụng ghi lại cảm xúc hằng ngày.")
-    if data.q5 == 2: context_summary.append("cảm thấy buồn khi có ứng dụng ghi lại cảm xúc hằng ngày.")
-    if data.q5 == 3: context_summary.append("cảm thấy bình thường khi có ứng dụng ghi lại cảm xúc hằng ngày.")
-    if data.q5 == 4: context_summary.append("cảm thấy vui vẻ khi có ứng dụng ghi lại cảm xúc hằng ngày.")
+    if data.q5 == 1: context_summary.append("cảm thấy Nhàm chán khi có ứng dụng ghi lại cảm xúc hằng ngày.")
+    if data.q5 == 2: context_summary.append("cảm thấy Vô dụng khi có ứng dụng ghi lại cảm xúc hằng ngày.")
+    if data.q5 == 3: context_summary.append("cảm thấy không quan tâm khi có ứng dụng ghi lại cảm xúc hằng ngày.")
+    if data.q5 == 4: context_summary.append("cảm thấy phù hợp khi có ứng dụng ghi lại cảm xúc hằng ngày.")
     if data.q5 == 5: context_summary.append("cảm thấy hào hứng khi có ứng dụng ghi lại cảm xúc hằng ngày.")  
 
     if data.q6 == 1: context_summary.append("cảm thấy căng thẳng khi chia sẻ cảm xúc của mình đối với người khác.")
@@ -158,11 +158,10 @@ async def handle_survey(data: SurveyData, db: Session = Depends(get_db)):
     Bạn là Emo, một giáo viên rất yêu thương HS, một chuyên gia tâm lý học đường ảo của học sinh THPT.
     Lắng nghe và đưa ra lời khuyên nhẹ nhàng, truyền cảm hứng cho ngày hôm sau.Một học sinh vừa chia sẻ cảm xúc của mình.
     Tên của HS là {full_name}, giới tính là {data.gender}.
-    Hãy phản hồi theo cấu trúc sau:
+    Hãy phản hồi theo cấu trúc chỉ với 2 đoạn trừ lời chào sau:
     - Lời chào thân mật (gọi tên học sinh theo cách dễ thương, gần gũi, ví dụ “Chào Minh nè 💛”).
-    - Thể hiện sự thấu hiểu và đồng cảm với tâm sự của học sinh (dùng ngôn ngữ nhẹ nhàng, không phán xét).
     - Đưa ra lời khuyên tích cực, ngắn gọn – giúp học sinh biết nên làm gì để có một ngày vui hơn hoặc nhẹ lòng hơn vào ngày hôm sau (gợi ý hành động cụ thể, như nghe nhạc, viết nhật ký, nói chuyện với bạn bè, đi dạo, tự thưởng món yêu thích, v.v.).
-    - Kết thúc bằng một thông điệp khích lệ (ví dụ: “Ngày mai chắc chắn sẽ tốt hơn đó 🌈” hoặc “Bạn đang làm rất tốt rồi, đừng quên mỉm cười nhé 💪”).
+    - Kết thúc bằng một thông điệp ngắn gọn khích lệ (ví dụ: “Ngày mai chắc chắn sẽ tốt hơn đó 🌈” hoặc “Bạn đang làm rất tốt rồi, đừng quên mỉm cười nhé 💪”).
     Giọng văn nên:
     - Ấm áp, chân thành, phù hợp với học sinh THPT
     - Không phán xét
@@ -245,5 +244,6 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
