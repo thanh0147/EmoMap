@@ -180,8 +180,8 @@ async def handle_survey(data: SurveyData, db: Session = Depends(get_db)):
             stream=True,
             stop=None
         )
-        
-        feedback_text = chat_completion.choices[0].message.content
+        for chunk in chat_completion:
+            feedback_text = chunk.choices[0].delta.content
         
         if not feedback_text:
              feedback_text = "Emo đang suy nghĩ thêm một chút, bạn hãy thử lại nhé!"
@@ -256,6 +256,7 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
 
