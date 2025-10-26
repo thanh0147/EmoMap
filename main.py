@@ -1,6 +1,6 @@
 import os
+from groq import Groq
 from typing import Optional
-import google.generativeai as genai
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -11,27 +11,18 @@ from sqlalchemy.orm import Session
 import models
 import database
 # Tải API key từ file .env
-api_key = os.getenv("AIzaSyCvOEzoZy4I5hJooz5bpayWI-nY9XLdo_k")
-genai.configure(api_key=api_key)
-# ✅ KHAI BÁO CẤU HÌNH AN TOÀN
-safety_settings = [
-    {
-        "category": "HARM_CATEGORY_HARASSMENT",
-        "threshold": "BLOCK_NONE"
-    },
-    {
-        "category": "HARM_CATEGORY_HATE_SPEECH",
-        "threshold": "BLOCK_NONE"
-    },
-    {
-        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-        "threshold": "BLOCK_NONE"
-    },
-    {
-        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-        "threshold": "BLOCK_NONE"
-    }
-]
+# Khởi tạo client Groq
+try:
+    groq_client = Groq(
+        api_key=os.getenv("GROQ_API_KEY"),
+    )
+except Exception as e:
+    print(f"Lỗi khi khởi tạo Groq client: {e}")
+    # Bạn có thể muốn raise lỗi ở đây để server không khởi động
+    
+# Chọn model của Groq (llama3-8b là model nhanh nhất)
+GROQ_MODEL = "llama3-8b-8192"
+
 # Khởi tạo ứng dụng FastAPI
 app = FastAPI()
 
@@ -72,19 +63,6 @@ class SurveyData(BaseModel):
     q8: int
     openEnded: Optional[str] = ""
 
-
-# --- 3. KHỞI TẠO MÔ HÌNH GEMINI ---
-
-generation_config = {
-  "temperature": 0.7,
-  "top_p": 1,
-  "max_output_tokens": 2048,
-}
-model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
-    safety_settings=safety_settings,
-    generation_config=generation_config
-)
 
 
 # --- 4. TẠO API ENDPOINT ---
@@ -190,13 +168,30 @@ async def handle_survey(data: SurveyData, db: Session = Depends(get_db)):
     Chia sẻ thêm của học sinh: "{data.openEnded if data.openEnded else "Học sinh không chia sẻ gì thêm."}"
     """
     
+    # THÊM KHỐI NÀY VÀO
     try:
-        response = model.generate_content(prompt)
-        # Trả về phản hồi dạng JSON cho frontend
-        return {"feedback": response.text}
+        # Groq sử dụng định dạng chat giống OpenAI
+        chat_completion = groq_client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt, # Prompt của bạn đã bao gồm hướng dẫn (Bạn là Emo...)
+                }
+            ],
+            model=GROQ_MODEL,
+            temperature=0.7,       # Vẫn dùng "độ sáng tạo"
+            max_tokens=1024,       # Giới hạn token trả về
+        )
+        
+        feedback_text = chat_completion.choices[0].message.content
+        
+        if not feedback_text:
+             feedback_text = "Emo đang suy nghĩ thêm một chút, bạn hãy thử lại nhé!"
+        
+        return {"feedback": feedback_text}
+    
     except Exception as e:
-        print(f"Error calling Gemini API: {e}")
-        # Ném một lỗi HTTP để frontend có thể xử lý
+        print(f"!!! Error calling Groq API: {e}")
         raise HTTPException(status_code=500, detail="Có lỗi xảy ra khi tạo phản hồi từ AI.")
 
 # (Thêm vào cuối file main.py)
@@ -263,6 +258,7 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
 
