@@ -53,6 +53,75 @@
     h2 { font-size: 1.3rem; }
     label { font-size: 0.95rem; }
     button { font-size: 1rem; }
+
+    /* 1. Thu nhỏ container chính */
+    .container {
+        width: 95%; /* Chiếm gần hết màn hình */
+        padding: 1.5rem 1rem; /* Giảm padding */
+        margin-top: 1rem;
+    }
+
+    /* 2. Điều chỉnh font chữ */
+    h1 {
+        font-size: 1.6rem; /* Giảm cỡ chữ tiêu đề */
+    }
+
+    .form-section h2 {
+        font-size: 1.2rem;
+    }
+
+    /* 3. Sửa lỗi ô "Lớp" và "Giới tính" */
+    .class-gender-group {
+        flex-direction: column; /* Xếp chồng lên nhau */
+        align-items: flex-start; /* Căn lề trái */
+        gap: 0.5rem; /* Giảm khoảng cách */
+    }
+
+    .class-gender-group .input-group {
+        width: 100%; /* Mỗi nhóm chiếm 100% chiều rộng */
+        max-width: none; /* Bỏ giới hạn cũ */
+    }
+
+    .class-gender-group .input-group:last-child {
+        justify-content: flex-start; /* Căn nhóm giới tính về bên trái */
+        gap: 15px; /* Khoảng cách giữa các nút radio */
+    }
+
+    /* 4. Đảm bảo tất cả input đều vừa màn hình */
+    .form-group input[type="text"] {
+        width: 100%; /* Tự động co giãn 100% */
+        /* Cần thêm 'box-sizing' nếu input bị tràn */
+        box-sizing: border-box; 
+    }
+
+    /* 5. Tối ưu Slider (Thanh trượt) */
+    .likert-icons {
+        font-size: 1.2rem; /* Thu nhỏ icon emoji */
+    }
+    
+    .likert-slider {
+        margin: 0.2rem 0;
+    }
+
+    /* 6. Tối ưu các nút bấm */
+    .btn, .btn-next, .btn-prev, button[type="submit"] {
+        width: 100%; /* Nút bấm chiếm 100% chiều rộng */
+        padding: 0.8rem; /* Tăng vùng nhấn cho dễ bấm */
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+    
+    .button-group {
+        flex-direction: column; /* Các nút bấm xếp chồng lên nhau */
+    }
+
+    /* 7. Sửa link "Xem biểu đồ" */
+    .dashboard-link {
+        position: static; /* Bỏ neo, cho nó vào luồng bình thường */
+        display: block; /* Biến thành khối */
+        text-align: center; /* Căn giữa */
+        margin-bottom: 1rem; /* Tạo khoảng cách */
+    }
 }
 /* --- HIỆU ỨNG MASCOT CHIM CÁNH CỤT --- */
 .penguin-mascot {
@@ -330,3 +399,4 @@ input[type="text"], textarea { width: 100%; padding: 0.8rem; border: 1px solid v
     font-size: 15px;
 
 }
+
