@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: { beginAtZero: false, min: 1, max: 5, title: { display: true, text: 'Mức độ (Trung bình từ 1-5)' } },
                         x: { title: { display: true, text: 'Ngày' } }
@@ -78,3 +79,4 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAndDrawChart(30);
 
 });
+
