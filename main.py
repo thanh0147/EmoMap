@@ -43,7 +43,7 @@ app.add_middleware(
 # Cấu trúc này PHẢI khớp với dữ liệu mà frontend gửi lên
 
 class SurveyData(BaseModel):
-    fullName: str
+    fullName: Optional[str] = None
     anonymous: Optional[str] = None # Checkbox có thể không gửi giá trị
     className: str
     gender: str
@@ -68,7 +68,9 @@ async def handle_survey(data: SurveyData, db: Session = Depends(get_db)):
     """
         # --- BƯỚC 1: Chuẩn bị dữ liệu ---
     is_anonymous_bool = data.anonymous == 'on'
-    full_name = "Ẩn danh" if is_anonymous_bool else data.fullName
+    full_name = "Ẩn danh" 
+    if not is_anonymous_bool and data.fullName:
+        fullName = data.fullName
 
         # --- BƯỚC 2: Tạo đối tượng để lưu ---
     db_response = models.SurveyResponse(
@@ -262,6 +264,7 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
 
