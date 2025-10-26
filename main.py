@@ -15,7 +15,7 @@ import database
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     
 # Chọn model của Groq (llama3-8b là model nhanh nhất)
-GROQ_MODEL = "llama-3.1-8b-instant"
+GROQ_MODEL = "llama-3.3-70b-versatile"
 
 # Khởi tạo ứng dụng FastAPI
 app = FastAPI()
@@ -252,6 +252,7 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
 
