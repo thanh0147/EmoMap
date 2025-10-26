@@ -1,6 +1,20 @@
 /* (Thêm đoạn này vào file style.css của bạn, có thể để ở đầu hoặc cuối) */
 /* Trong file style.css */
+.modal-content {
+    width: 90%;             /* Chiều rộng là 90% màn hình */
+    max-width: 500px;         /* Chiều rộng tối đa trên máy tính */
+    box-sizing: border-box;   /* Đảm bảo padding không làm tràn */
+    max-height: 80vh;       /* Chiều cao tối đa là 80% màn hình */
+    overflow-y: auto;       /* Tự động thêm thanh cuộn nếu nội dung quá dài */
+}
 
+/* 2. Đảm bảo văn bản phản hồi tự động xuống dòng */
+#feedback-text {
+    word-wrap: break-word; /* Tự bẻ từ để chống tràn */
+    white-space: pre-wrap; /* Giữ nguyên các định dạng xuống dòng từ AI */
+    font-size: 0.95rem;    /* Cỡ chữ dễ đọc */
+    line-height: 1.6;      /* Giãn dòng cho dễ đọc */
+}
 /* Điều chỉnh bố cục tổng thể của form trên màn hình nhỏ */
 @media (max-width: 600px) {
     .form-section {
@@ -121,6 +135,18 @@
         display: block; /* Biến thành khối */
         text-align: center; /* Căn giữa */
         margin-bottom: 1rem; /* Tạo khoảng cách */
+    }
+    .modal-content {
+        width: 92vw;      /* Chiếm 92% chiều rộng màn hình */
+        padding: 1.2rem;  /* Giảm padding bên trong modal */
+    }
+
+    .modal-content h2 { /* Tiêu đề "Phản hồi từ Emo" */
+        font-size: 1.2rem;
+    }
+
+    #feedback-text {
+        font-size: 0.9rem; /* Cỡ chữ nhỏ hơn một chút cho vừa vặn */
     }
 }
 /* --- HIỆU ỨNG MASCOT CHIM CÁNH CỤT --- */
@@ -429,5 +455,6 @@ input[type="text"], textarea { width: 100%; padding: 0.8rem; border: 1px solid v
     font-size: 15px;
 
 }
+
 
 
