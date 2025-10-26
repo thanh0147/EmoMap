@@ -12,16 +12,10 @@ import models
 import database
 # Tải API key từ file .env
 # Khởi tạo client Groq
-try:
-    groq_client = Groq(
-        api_key=os.getenv("GROQ_API_KEY"),
-    )
-except Exception as e:
-    print(f"Lỗi khi khởi tạo Groq client: {e}")
-    # Bạn có thể muốn raise lỗi ở đây để server không khởi động
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     
 # Chọn model của Groq (llama3-8b là model nhanh nhất)
-GROQ_MODEL = "openai/gpt-oss-20b"
+GROQ_MODEL = "llama-3.1-8b-instant"
 
 # Khởi tạo ứng dụng FastAPI
 app = FastAPI()
@@ -175,7 +169,7 @@ async def handle_survey(data: SurveyData, db: Session = Depends(get_db)):
             messages=[
                 {
                     "role": "user",
-                    "content": prompt, # Prompt của bạn đã bao gồm hướng dẫn (Bạn là Emo...)
+                    "content": prompt, # Pro
                 }
             ],
             model=GROQ_MODEL,
@@ -258,6 +252,7 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
 
