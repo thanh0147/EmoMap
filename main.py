@@ -178,8 +178,17 @@ async def handle_survey(data: SurveyData, db: Session = Depends(get_db)):
             top_p=1,
             stop=None
         )
-        feedback_text = chat_completion.choices[0].message.content
+        # Lấy toàn bộ phản hồi thô từ AI
+        full_response = chat_completion.choices[0].message.content
         
+        # ✅ THÊM BỘ LỌC ĐỂ CẮT BỎ THẺ <think>
+        if "</think>" in full_response:
+            # Nếu có thẻ <think>, tách chuỗi tại thẻ đóng
+            # và chỉ lấy phần nội dung CUỐI CÙNG
+            feedback_text = full_response.split("</think>")[-1].strip()
+        else:
+            # Nếu không có thẻ, dùng như bình thường
+            feedback_text = full_response.strip()
         if not feedback_text:
              feedback_text = "Emo đang suy nghĩ thêm một chút, bạn hãy thử lại nhé!"
         
@@ -253,6 +262,7 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
 
