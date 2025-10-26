@@ -81,7 +81,7 @@ generation_config = {
   "max_output_tokens": 2048,
 }
 model = genai.GenerativeModel(
-    model_name="gemini-2.5-flash",
+    model_name="gemini-1.5-flash",
     safety_settings=safety_settings,
     generation_config=generation_config
 )
@@ -263,6 +263,7 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
 
