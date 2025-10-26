@@ -21,7 +21,7 @@ except Exception as e:
     # Bạn có thể muốn raise lỗi ở đây để server không khởi động
     
 # Chọn model của Groq (llama3-8b là model nhanh nhất)
-GROQ_MODEL = "llama3-8b-8192"
+GROQ_MODEL = "openai/gpt-oss-20b"
 
 # Khởi tạo ứng dụng FastAPI
 app = FastAPI()
@@ -171,7 +171,7 @@ async def handle_survey(data: SurveyData, db: Session = Depends(get_db)):
     # THÊM KHỐI NÀY VÀO
     try:
         # Groq sử dụng định dạng chat giống OpenAI
-        chat_completion = groq_client.chat.completions.create(
+        chat_completion = client.chat.completions.create(
             messages=[
                 {
                     "role": "user",
@@ -258,6 +258,7 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
 
