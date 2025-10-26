@@ -177,7 +177,6 @@ async def handle_survey(data: SurveyData, db: Session = Depends(get_db)):
             max_completion_tokens=4096,
             top_p=1,
             reasoning_effort="default",
-            stream=True,
             stop=None
         )
         feedback_text = chat_completion.choices[0].message.content
@@ -255,6 +254,7 @@ async def get_dashboard_data(
         ) for row in query_result
 
     ]
+
 
 
 
