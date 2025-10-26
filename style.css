@@ -132,6 +132,36 @@
     user-select: none; /* Không cho phép bôi đen icon */
     animation: wobble 2.5s ease-in-out infinite; /* Áp dụng hiệu ứng lắc lư */
 }
+/* (Dán vào cuối file style.css) */
+
+/* === CSS cho Biểu đồ === */
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    /* Bạn có thể đặt chiều cao cố định cho di động */
+    height: 450px; 
+}
+
+/* Sửa các nút lọc trên trang dashboard */
+@media (max-width: 600px) {
+    .dashboard-container {
+        width: 95%;
+        padding: 1rem;
+    }
+    
+    .filter-section {
+        flex-direction: column; /* Xếp chồng các nút */
+        align-items: stretch; /* Kéo dãn các nút */
+    }
+
+    .filter-section button {
+        width: 100%;
+    }
+    
+    .chart-wrapper {
+        height: 350px; /* Chiều cao nhỏ hơn cho di động */
+    }
+}
 
 /* Thêm hiệu ứng nhỏ khi người dùng di chuột qua */
 .penguin-mascot:hover {
@@ -399,4 +429,5 @@ input[type="text"], textarea { width: 100%; padding: 0.8rem; border: 1px solid v
     font-size: 15px;
 
 }
+
 
